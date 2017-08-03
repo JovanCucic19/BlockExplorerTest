@@ -1,0 +1,15 @@
+<div style="text-align:center">
+  <h1>
+    Ovo je block deo
+  </h1>
+  ovo je block komponenta
+  <!-- <input type="text" #msgInput name="" value="">
+    <button (click)="sendMsg(msgInput.value)">Send</button> -->
+    <br>
+    <div *ngIf="latestBlocks">
+      <div *ngFor="let block of latestBlocks">
+        {{block.id}}
+        {{block.title}}
+      </div>
+    </div>
+  </div>

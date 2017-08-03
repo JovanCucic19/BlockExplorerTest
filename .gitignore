@@ -1,0 +1,4 @@
+.idea/
+py3env/
+__pycache__/
+angular-test/node_modules/

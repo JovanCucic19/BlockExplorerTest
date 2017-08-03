@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Flask-SocketIO Test</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Block explorer socket</h1>
+    <h3></h3>
+    <table class="table" id="myTable">
+      <thead>
+      <tr>
+        <th>Height</th>
+        <th>Age</th>
+        <th>Transactions</th>
+        <th>Total sent</th>
+        <th>Size(kB)</th>
+      </tr>
+    </thead>
+    <tbody id='myTbody'>
+    </tbody>
+  </table>
+</div>
+    <!-- <div id="log"></div> -->
+
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+
+            namespace = '/test';
+
+            var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace);
+
+            socket.on('connect', function() {
+                socket.emit('connected');
+            });
+
+            socket.on('my_response', function(data) {
+               $('h3').text("User: " + data.data);
+               // console.log(data.data);
+            });
+
+            //Proveriti kljuceve pre nego sto pozoves JSON objekat
+            socket.on('message', function(msg) {
+              // $('#log').append('<br>' + $('<div/>').text(msg.data[0].height).html());
+
+              // $('#myTbody').append(
+              //   '<tr>' +
+              //   '<td>' + msg.data.id + '</td>'+
+              //   '<td>' + msg.data.title + '</td>'+
+              //   '<td>' + msg.data[0].tx.length + '</td>'+
+              //   '<td>' + msg.data[0].total + '</td>'+
+              //   '<td>' + msg.data[0].size + '</td>'+
+              //   '</tr>'
+              // );
+
+              $('#myTbody').append(
+                '<tr>' +
+                '<td>' + msg.data.id + '</td>'+
+                '<td>' + msg.data.title + '</td>'+
+                '</tr>'
+              );
+              console.log(msg)
+            });
+        });
+    </script>
+</body>
+</html>
