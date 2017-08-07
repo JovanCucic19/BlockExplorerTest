@@ -47,3 +47,22 @@
 #     if thread is None:
 #         thread = socketio.start_background_task(target=background_thread)
 #     emit('msg', {'data': 'Connected'})
+
+
+# ==== OVO JE TEST ZA REST SERVER NE BRISI ====
+
+# del niz_taskova[:]
+# niz_taskova.extend(get_latest_five_tasks())
+# razlika = niz_taskova[-1]['id']-conf.CURRENT_BLOCK
+#
+# if razlika != 0:
+#     conf.CURRENT_BLOCK=niz_taskova[-1]['id']
+#     while razlika != 0:
+#         # print("Trenutna razlika je: {}".format(razlika))
+#         socketio.emit('message', {'data':niz_taskova[len(niz_taskova)-razlika]}, namespace='/test')
+#         razlika-=1
+#         pass
+
+# print('Nema razlike trenutno')
+
+# ==== OVDE SE ZAVRSAVA TEST ZA REST SEVER ====
