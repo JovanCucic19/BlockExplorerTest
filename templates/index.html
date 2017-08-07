@@ -6,7 +6,7 @@
 <body>
   <div class="container">
     <h1>Block socket</h1>
-    <h3></h3>
+    <h3 id="blockConnected"></h3>
     <table class="table">
       <thead>
       <tr>
@@ -21,7 +21,7 @@
     </tbody>
   </table>
   <h1>Transaction socket</h1>
-  <h3></h3>
+  <h3 id="txConnected"></h3>
   <table class="table">
     <thead>
     <tr id="trID" style="top: 50px;">
@@ -49,16 +49,25 @@
             var txSocket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + txNamespace);
 
             blockSocket.on('connect', function() {
-                blockSocket.emit('connected');
+                blockSocket.emit('block_connected');
             });
 
-            blockSocket.on('my_response', function(data) {
-               $('h3').text("User: " + data.data);
+            txSocket.on('connect', function() {
+                txSocket.emit('tx_connected');
+            });
+
+            blockSocket.on('block_response', function(data) {
+               $('#blockConnected').text("User: " + data.block_data);
+               // console.log(data.data);
+            });
+
+            txSocket.on('tx_response', function(data) {
+               $('#txConnected').text("User: " + data.tx_data);
                // console.log(data.data);
             });
 
             //Proveriti kljuceve pre nego sto pozoves JSON objekat
-            blockSocket.on('message', function(msg) {
+            blockSocket.on('background_block_sender', function(msg) {
               // $('#log').append('<br>' + $('<div/>').text(msg.data[0].height).html());
 
               // $('#myTbody').append(
@@ -70,23 +79,22 @@
 
               $('#blockTbody').prepend(
                 '<tr>' +
-                '<td>' + msg.data.height + '</td>'+
-                '<td>' + msg.data.time + '</td>'+
-                '<td>' + msg.data.tx.length + '</td>'+
-                '<td>' + msg.data.total + '</td>'+
-                '<td>' + msg.data.size + '</td>'+
+                '<td>' + msg.latest_block_data.height + '</td>'+
+                '<td>' + msg.latest_block_data.time + '</td>'+
+                '<td>' + msg.latest_block_data.tx.length + '</td>'+
+                '<td>' + msg.latest_block_data.total + '</td>'+
+                '<td>' + msg.latest_block_data.size + '</td>'+
                 '</tr>'
               );
-              console.log(msg.data.height)
+              console.log(msg.latest_block_data.height)
             });
 
-
-            txSocket.on('message', function(msg) {
+            txSocket.on('background_tx_sender', function(msg) {
 
               $('#txTbody').prepend(
                 '<tr>' +
-                '<td>' + msg.data.txid + '</td>'+
-                '<td>' + Number((msg.data.total).toFixed(4)) + ' GAME'+'</td>'+
+                '<td>' + msg.latest_tx_data.txid + '</td>'+
+                '<td>' + msg.latest_tx_data.total + ' GAME'+'</td>'+
                 '</tr>'
               );
               console.log(msg)

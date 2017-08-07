@@ -17,6 +17,7 @@ def get_latest_transactions(url):
     transactions = res.json()
     return transactions
 
+
 # pronadji nacin kako da samo pozoves metode u thread-u u app.py
 # glavni problem je trenutno sto ne moze da se odvoji socket iz app.py
 # pronadji resenje za pozivanja socketa iz helpers.py
