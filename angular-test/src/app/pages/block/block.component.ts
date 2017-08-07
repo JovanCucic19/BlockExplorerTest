@@ -13,25 +13,23 @@ export class BlockComponent{
   latestBlocks: any=[];
 
   constructor(private blockService : BlockService) {
-    this.message = "nesto i neko"
     this.title = "Angular test projekat"
     // console.log(this.message)
-    console.log("Evo me iz konstruktora")
+    // console.log("Evo me iz konstruktora")
   }
 
   ngOnInit() {
+
+    this.blockService.getMsg()
     this.blockService
         .getMessage()
         .subscribe(data => {
           this.message = data,
           this.latestBlocks.push(data);
         });
-      console.log(this.latestBlocks[0])
-  }
-  sendMsg(message){
-     this.blockService.sendMessage(this.message);
-     console.log(this.message[0])
-     console.log("Evo me iz sendMsg")
+        //console.log(this.blockService.getMsg());
+
+      // console.log(this.latestBlocks)
   }
 
 }

@@ -11,7 +11,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { BlockService } from './pages/block/block.service';
 import { HomeService } from './pages/home/home.service';
 
-const config: SocketIoConfig = { url: 'http://localhost:5004/test', options: {} };
+const config: SocketIoConfig = { url: 'http://localhost:5004/block', options: {} };
 
 const appRoutes: Routes = [
     {path: 'blocks', component: BlockComponent},

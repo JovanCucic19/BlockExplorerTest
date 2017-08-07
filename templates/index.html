@@ -5,9 +5,9 @@
 </head>
 <body>
   <div class="container">
-    <h1>Block explorer socket</h1>
+    <h1>Block socket</h1>
     <h3></h3>
-    <table class="table" id="myTable">
+    <table class="table">
       <thead>
       <tr>
         <th>Height</th>
@@ -17,11 +17,22 @@
         <th>Size(kB)</th>
       </tr>
     </thead>
-    <tbody id='myTbody'>
+    <tbody id='blockTbody'>
     </tbody>
   </table>
+  <h1>Transaction socket</h1>
+  <h3></h3>
+  <table class="table">
+    <thead>
+    <tr id="trID" style="top: 50px;">
+      <th>Tx id</th>
+      <th>Tx total</th>
+    </tr>
+  </thead>
+  <tbody id='txTbody'>
+  </tbody>
+</table>
 </div>
-    <!-- <div id="log"></div> -->
 
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -31,37 +42,51 @@
     <script type="text/javascript" charset="utf-8">
         $(document).ready(function() {
 
-            namespace = '/test';
+            blockNamespace = '/block';
+            txNamespace = '/tx';
 
-            var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace);
+            var blockSocket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + blockNamespace);
+            var txSocket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + txNamespace);
 
-            socket.on('connect', function() {
-                socket.emit('connected');
+            blockSocket.on('connect', function() {
+                blockSocket.emit('connected');
             });
 
-            socket.on('my_response', function(data) {
+            blockSocket.on('my_response', function(data) {
                $('h3').text("User: " + data.data);
                // console.log(data.data);
             });
 
             //Proveriti kljuceve pre nego sto pozoves JSON objekat
-            socket.on('message', function(msg) {
+            blockSocket.on('message', function(msg) {
               // $('#log').append('<br>' + $('<div/>').text(msg.data[0].height).html());
 
               // $('#myTbody').append(
               //   '<tr>' +
               //   '<td>' + msg.data.id + '</td>'+
               //   '<td>' + msg.data.title + '</td>'+
-              //   '<td>' + msg.data[0].tx.length + '</td>'+
-              //   '<td>' + msg.data[0].total + '</td>'+
-              //   '<td>' + msg.data[0].size + '</td>'+
               //   '</tr>'
               // );
 
-              $('#myTbody').append(
+              $('#blockTbody').prepend(
                 '<tr>' +
-                '<td>' + msg.data.id + '</td>'+
-                '<td>' + msg.data.title + '</td>'+
+                '<td>' + msg.data.height + '</td>'+
+                '<td>' + msg.data.time + '</td>'+
+                '<td>' + msg.data.tx.length + '</td>'+
+                '<td>' + msg.data.total + '</td>'+
+                '<td>' + msg.data.size + '</td>'+
+                '</tr>'
+              );
+              console.log(msg.data.height)
+            });
+
+
+            txSocket.on('message', function(msg) {
+
+              $('#txTbody').prepend(
+                '<tr>' +
+                '<td>' + msg.data.txid + '</td>'+
+                '<td>' + Number((msg.data.total).toFixed(4)) + ' GAME'+'</td>'+
                 '</tr>'
               );
               console.log(msg)

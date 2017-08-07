@@ -6,10 +6,12 @@
   <!-- <input type="text" #msgInput name="" value="">
     <button (click)="sendMsg(msgInput.value)">Send</button> -->
     <br>
+    {{title}}
     <div *ngIf="latestBlocks">
       <div *ngFor="let block of latestBlocks">
-        {{block.id}}
-        {{block.title}}
+        <!-- {{block.id}}
+        {{block.title}} -->
+        {{block.data.height}}
       </div>
     </div>
   </div>
