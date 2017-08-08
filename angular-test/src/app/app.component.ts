@@ -1,37 +1,34 @@
 import { Component } from '@angular/core';
+import { SocketService } from './shared/socket.service';
 
-import { BlockService } from './block.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  // providers: [BlockService],
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [SocketService]
 })
 
 export class  AppComponent {
-  // message : Object;
-  // title: string;
-  // latestBlocks: any = [];
-  //
-  // constructor(private blockService : BlockService) {
-  //   this.message = "nesto i neko"
-  //   this.title = "Angular test projekat"
-  //   console.log("CAos")
-  // }
-  //
-  // ngOnInit() {
-  //   this.blockService
-  //       .getMessage()
-  //       .subscribe(data => {
-  //         this.message = data,
-  //         this.latestBlocks.push(data);
-  //       });
-  //       console.log(this.latestBlocks)
-  // }
-  // sendMsg(message){
-  //    this.blockService.sendMessage(this.message);
-  //    console.log(this.message)
-  // }
+
+  title: string;
+  private socket: any;
+  odgovor: string;
+  test: any;
+
+  constructor(private socketService: SocketService){
+    this.title = "Ovo je app componenta";
+  }
+
+  ngOnInit(): void {
+    this.socket = this.socketService.initConnection();
+    this.getInitMessage();
+  }
+
+  private getInitMessage(): void {
+    this.socket = this.socketService.get().subscribe((odgovor) =>{
+      this.test = odgovor
+    });
+  }
 
 }

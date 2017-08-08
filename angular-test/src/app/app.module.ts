@@ -5,34 +5,21 @@ import { SocketIoConfig } from 'ng-socket-io';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { BlockComponent } from './pages/block/block.component';
-import { HomeComponent } from './pages/home/home.component';
 
-import { BlockService } from './pages/block/block.service';
-import { HomeService } from './pages/home/home.service';
 
-const config: SocketIoConfig = { url: 'http://localhost:5004/block', options: {} };
+//const config: SocketIoConfig = { url: 'http://localhost:5004/block', options: {} };
 
-const appRoutes: Routes = [
-    {path: 'blocks', component: BlockComponent},
-    {path: 'home', component: HomeComponent}
-]
+const appRoutes: Routes = []
 
 @NgModule({
   declarations: [
-    AppComponent,
-    BlockComponent,
-    HomeComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    SocketIoModule.forRoot(config),
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [
-    BlockService,
-    HomeService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
