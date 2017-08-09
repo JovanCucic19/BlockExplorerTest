@@ -3,7 +3,51 @@
   <h1>
     {{title}}
   </h1>
-  {{test}}
+    <div class="container">
+    <h1>Block socket</h1>
+    <h3 id="blockConnected">{{block_test}}</h3>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Height</th>
+        <th>Age</th>
+        <th>Transactions</th>
+        <th>Total sent</th>
+        <th>Size(kB)</th>
+      </tr>
+    </thead>
+
+    <tbody id='blockTbody'>
+
+    <tr *ngFor="let block of blocks">
+      <td>{{ block.height }}</td>
+      <td>{{ block.time }}</td>
+      <td>{{ block.tx.length }}</td>
+      <td>{{ block.total }} GAME</td>
+      <td>{{ block.size }} kb</td>
+  </tr>
+    </tbody>
+  </table>
+  <h1>Transaction socket</h1>
+  <h3 id="txConnected">{{ tx_test }}</h3>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Tx Id</th>
+        <th>Spent</th>
+
+      </tr>
+    </thead>
+
+    <tbody id='txTbody'>
+
+    <tr *ngFor="let tx of txs">
+      <td>{{ tx.txid }}</td>
+      <td>{{ tx.total }} GAME</td>
+  </tr>
+    </tbody>
+  </table>
+</div>
       <!-- <a routerLink="/blocks" routerLinkActive="active">Blocks</a>
       <a routerLink="/home" routerLinkActive="active">Home</a> -->
 

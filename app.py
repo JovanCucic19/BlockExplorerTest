@@ -18,12 +18,14 @@ log.setLevel(logging.ERROR)
 def index():
     return render_template('index.html', async_mode=conf.socketio.async_mode)
 
+
 @conf.socketio.on('block_connected', namespace='/block')
 def block_connect():
     if conf.THREAD_BLOCK is None:
         conf.THREAD_BLOCK = conf.socketio.start_background_task(target=st.background_thread)
     emit('block_response', {'block_data': 'Block connected'})
     print("Konektovan je")
+
 
 @conf.socketio.on('tx_connected', namespace='/tx')
 def tx_connect():
