@@ -41,9 +41,11 @@
 
     <tbody id='txTbody'>
 
-    <tr *ngFor="let tx of txs.slice().reverse()">
+    <tr *ngFor="let tx of txs; let i=index">
+        <div *ngIf="i<5">
       <td>{{ tx.txid }}</td>
       <td>{{ tx.total }} GAME</td>
+        </div>
   </tr>
     </tbody>
   </table>
