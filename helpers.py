@@ -12,6 +12,7 @@ def get_latest_five_blocks():
     five_blocks = res.json()
     return five_blocks
 
+
 def get_latest_transactions(url):
     res = req.get(url)
     transactions = res.json()

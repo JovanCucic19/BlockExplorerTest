@@ -1,7 +1,7 @@
 import helpers as helpp
 import config as conf
 
-conf.CURRENT_BLOCK = helpp.get_latest_five_blocks()[-1]['height']
+conf.CURRENT_BLOCK = helpp.get_latest_five_blocks()[0]['height']
 
 def background_thread():
     niz_taskova = []
