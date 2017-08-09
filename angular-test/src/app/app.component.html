@@ -19,7 +19,7 @@
 
     <tbody id='blockTbody'>
 
-    <tr *ngFor="let block of blocks">
+    <tr *ngFor="let block of blocks.slice().reverse()">
       <td>{{ block.height }}</td>
       <td>{{ block.time }}</td>
       <td>{{ block.tx.length }}</td>
@@ -41,7 +41,7 @@
 
     <tbody id='txTbody'>
 
-    <tr *ngFor="let tx of txs">
+    <tr *ngFor="let tx of txs.slice().reverse()">
       <td>{{ tx.txid }}</td>
       <td>{{ tx.total }} GAME</td>
   </tr>

@@ -58,11 +58,11 @@ export class BlockSocketService {
 export class TxSocketService {
   private socket;
 
-  constructor(){
+  constructor() {
     this.initSocket();
   }
 
-  public initConnection(){
+  public initConnection() {
     this.socket.emit('tx_connected');
   }
 
@@ -70,9 +70,9 @@ export class TxSocketService {
     this.socket = socketio(SERVER_URL + tx_namespace);
   }
 
-  public getTxConnection(){
+  public getTxConnection() {
     let observable = new Observable(observer => {
-      this.socket.on('tx_response', (data) =>{
+      this.socket.on('tx_response', (data) => {
         observer.next(data.tx_data);
         console.log(data);
       });
