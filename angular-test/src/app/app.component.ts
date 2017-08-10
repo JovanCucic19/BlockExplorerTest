@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import {BlockSocketService, TxSocketService} from './shared/socket.service';
-
-
+import {Observable} from "rxjs/Observable";
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/delay';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +13,10 @@ import {BlockSocketService, TxSocketService} from './shared/socket.service';
 })
 
 export class  AppComponent {
+
+  cities$ = Observable
+    .of(this.getTx())
+    .delay(1000);
 
   title: string;
   private socket: any;
@@ -27,13 +33,13 @@ export class  AppComponent {
   private txs: any;
   tx_data: any;
 
-
-
   constructor(private blockSocketService: BlockSocketService, private txSocketService: TxSocketService){
-    this.title = "Ovo je app componenta";
+    this.title = 'Ovo je app componenta';
     this.blocks = [];
     this.txs = [];
+
   }
+
 
   ngOnInit(): void {
     this.socket = this.blockSocketService.initConnection();
@@ -47,7 +53,7 @@ export class  AppComponent {
   }
 
   private getBlockInitMessage(): void {
-    this.socket = this.blockSocketService.getBlockConnection().subscribe((block_response) =>{
+    this.socket = this.blockSocketService.getBlockConnection().subscribe((block_response) => {
       this.block_test = block_response;
     });
   }
@@ -59,13 +65,13 @@ export class  AppComponent {
   }
 
   private getBlock(): void {
-    this.socket = this.blockSocketService.getBlock().subscribe((block_data) =>{
+    this.socket = this.blockSocketService.getBlock().subscribe((block_data) => {
       this.blocks.push(block_data);
     });
   }
 
   private getTx(): void {
-    this.socket = this.txSocketService.getTx().subscribe((tx_data) =>{
+    this.socket = this.txSocketService.getTx().subscribe((tx_data) => {
       this.txs.push(tx_data);
     });
   }

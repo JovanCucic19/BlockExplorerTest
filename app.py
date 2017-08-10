@@ -24,7 +24,7 @@ def block_connect():
     if conf.THREAD_BLOCK is None:
         conf.THREAD_BLOCK = conf.socketio.start_background_task(target=st.background_thread)
     emit('block_response', {'block_data': 'Block connected'})
-    print("Konektovan je")
+    print("Block socket is connected")
 
 
 @conf.socketio.on('tx_connected', namespace='/tx')
@@ -32,6 +32,7 @@ def tx_connect():
     if conf.THREAD_TX is None:
         conf.THREAD_TX = conf.socketio.start_background_task(target=st.background_thread_tx)
     emit('tx_response', {'tx_data': 'Tx connected'})
+    print("Tx socket is connected")
 
 
 if __name__ == '__main__':

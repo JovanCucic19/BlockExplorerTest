@@ -2,10 +2,13 @@ import requests as req
 import json
 import config as conf
 
+
+# This def is used for testing the rest-server.py
 def get_latest_five_tasks():
     res = req.get(conf.LATEST_FIVE_TASKS_URL)
     five_tasks = res.json()
     return five_tasks
+
 
 def get_latest_five_blocks():
     res = req.get(conf.LATEST_FIVE_BLOCKS_URL)

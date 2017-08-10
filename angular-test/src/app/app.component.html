@@ -41,11 +41,13 @@
 
     <tbody id='txTbody'>
 
-    <tr *ngFor="let tx of txs; let i=index">
-        <div *ngIf="i<5">
-      <td>{{ tx.txid }}</td>
-      <td>{{ tx.total }} GAME</td>
-        </div>
+
+
+        <tr *ngFor="let city of cities$ | async">
+
+      <td>{{ city.txid }}</td>
+      <td>{{ city.time }} GAME</td>
+
   </tr>
     </tbody>
   </table>
