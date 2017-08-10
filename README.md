@@ -32,7 +32,8 @@ Run next three commands:
 ```
 python rest-server.py
 python app.py
-cd angular-test && ng serve
+cd angular-test && npm install
+ng serve
 ```
 ### If no errors are shown flask server is running on
 ```
