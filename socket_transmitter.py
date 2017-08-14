@@ -6,8 +6,8 @@ conf.CURRENT_BLOCK = helpp.get_latest_five_blocks()[-1]['height']
 
 
 def background_thread():
+    array_of_blocks = []
     while True:
-        array_of_blocks = []
         del array_of_blocks[:]
         array_of_blocks.extend(helpp.get_latest_five_blocks())
         difference_between_blocks = array_of_blocks[0]['height'] - conf.CURRENT_BLOCK
@@ -15,7 +15,7 @@ def background_thread():
         if difference_between_blocks > 0:
             conf.CURRENT_BLOCK = array_of_blocks[0]['height']
             while difference_between_blocks > 0:
-                print("Trenutna broj tx u blokovima: {}".format(conf.NUMBER_OF_TX_IN_BLOCK))
+                print("Current number tx in block: {}".format(conf.NUMBER_OF_TX_IN_BLOCK))
 
                 conf.NUMBER_OF_TX_IN_BLOCK += len(array_of_blocks[-1 + difference_between_blocks]['tx'])
                 conf.socketio.emit('background_block_sender', 
@@ -28,9 +28,10 @@ def background_thread():
 
 
 def background_thread_tx():
+    array_of_tx = []
     while True:
-        print("Ovo je iz tx {}".format(conf.NUMBER_OF_TX_IN_BLOCK))
-        array_of_tx = []
+        print("Info about tx's in block {}".format(conf.NUMBER_OF_TX_IN_BLOCK))
+
         del array_of_tx[:]
 
         if conf.NUMBER_OF_TX_IN_BLOCK > 0:
