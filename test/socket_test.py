@@ -215,7 +215,7 @@ class TestSocketIO(unittest.TestCase):
             mock_response.status_code = 200
             mock_response.content = received[0]['args'][0]
 
-            expected_block_data = {
+            actual_block_data = {
                 "bits": "0x1b05c193",
                 "chainwork": "0x65bb3334c246beee",
                 "difficulty": "11385.21547576",
@@ -247,9 +247,9 @@ class TestSocketIO(unittest.TestCase):
             mock_nextblockhash = response.content['nextblockhash']
 
             self.assertEqual(response.status_code, 200)
-            self.assertEqual(expected_block_data['hash'], check_typeof_parameter(mock_hash))
-            self.assertEqual(expected_block_data['height'], check_typeof_parameter(mock_height))
-            self.assertEqual(expected_block_data['nextblockhash'],
+            self.assertEqual(actual_block_data['hash'], check_typeof_parameter(mock_hash))
+            self.assertEqual(actual_block_data['height'], check_typeof_parameter(mock_height))
+            self.assertEqual(actual_block_data['nextblockhash'],
                              check_typeof_parameter(mock_nextblockhash))
 
     def test_mock_tx_data(self):
@@ -264,7 +264,7 @@ class TestSocketIO(unittest.TestCase):
             mock_response.status_code = 200
             mock_response.content = received[0]['args'][0]
 
-            expected_tx_data = {
+            actual_tx_data = {
             "blockhash": "23c034d50ed039e22ac276652f788f237c98f3a028acc60288e0a1624b0d54b4",
             "blocktime": 1502888665,
             "locktime": 0,
@@ -302,9 +302,9 @@ class TestSocketIO(unittest.TestCase):
             mock_total = response.content['total']
 
             self.assertEqual(response.status_code, 200)
-            self.assertEqual(expected_tx_data['blockhash'], check_typeof_parameter(mock_blockhash))
-            self.assertEqual(expected_tx_data['txid'], check_typeof_parameter(mock_txid))
-            self.assertEqual(expected_tx_data['total'], check_typeof_parameter(mock_total))
+            self.assertEqual(actual_tx_data['blockhash'], check_typeof_parameter(mock_blockhash))
+            self.assertEqual(actual_tx_data['txid'], check_typeof_parameter(mock_txid))
+            self.assertEqual(actual_tx_data['total'], check_typeof_parameter(mock_total))
 
 
 
