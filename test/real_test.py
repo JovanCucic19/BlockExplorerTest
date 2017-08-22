@@ -80,7 +80,6 @@ def testing_difference_between_blocks(difference_between_blocks):
         emit('block_mock_data', json_block_data, namespace='/block')
 
         difference_between_blocks -= 1
-        pass
 
 
 def socket_wait():
