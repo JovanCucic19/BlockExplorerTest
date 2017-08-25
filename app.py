@@ -28,6 +28,16 @@ def block_connect():
     print("Block socket is connected")
 
 
+@conf.socketio.on('disconnect', namespace='/block')
+def test_client_block_disconnect():
+    print('Client disconnected from block socket')
+
+
+@conf.socketio.on('disconnect', namespace='/tx')
+def test_client_tx_disconnect():
+    print('Client disconnected from tx socket')
+
+
 @conf.socketio.on('tx_connected', namespace='/tx')
 def tx_connect():
     if iv.THREAD_TX is None:
@@ -37,4 +47,4 @@ def tx_connect():
 
 
 if __name__ == '__main__':
-    conf.socketio.run(conf.app, debug=True, port=5004)
+    conf.socketio.run(conf.app, debug=False, port=5004)

@@ -20,7 +20,7 @@ def first_block_from_buffer(url_from_block_buffer):
 def get_differences_between_blocks(difference_between_blocks):
     iv.CURRENT_BLOCK = first_block_from_buffer(helpp.get_latest_five_blocks())
     while difference_between_blocks > 0:
-        print("Current number tx in block: {}".format(iv.NUMBER_OF_TX_IN_BLOCK))
+        # print("Current number tx in block: {}".format(iv.NUMBER_OF_TX_IN_BLOCK))
 
         iv.NUMBER_OF_TX_IN_BLOCK += len(
             block_buffer(helpp.get_latest_five_blocks())[-1 + difference_between_blocks]['tx'])
@@ -53,7 +53,7 @@ def tx_buffer(url):
 
 
 def emit_new_tx():
-    print("Info about tx's in block {}".format(iv.NUMBER_OF_TX_IN_BLOCK))
+    # print("Info about tx's in block {}".format(iv.NUMBER_OF_TX_IN_BLOCK))
 
     if iv.NUMBER_OF_TX_IN_BLOCK > 0:
         tx_buffer(conf.LATEST_N_TX_URL)
